@@ -1,7 +1,75 @@
-html {
-  background: url(../../assets/aspens.jpg) no-repeat center center fixed;
+.hero-img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  height: 100%;
+}
+
+.hero {
+  height: calc(100vh - 80px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+  text-align: center;
+  background: url(../../assets/aspens.jpg) no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  overflow: hidden;
+}
+
+.circle-button {
+  height: 5em;
+  width: 5em;
+  border-radius: 100%;
+  background: white;
+  bottom: 5em;
+  cursor: pointer;
+}
+
+.nav-down {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.arrow {
+  height: 2em;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.explore-trails {
+  width: 10em;
+  background: white;
+  bottom: 1em;
+  padding: 1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 1em;
+}
+
+.trails {
+  height: 100vh;
+}
+
+.hero-text {
+  font-family: "Rubik", sans-serif;
+  background: white;
+  align-self: center;
+  font-size: 3em;
+  padding: 1em;
+  width: 85%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  background: lightgray;
+  color: #ff5252;
 }
