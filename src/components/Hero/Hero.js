@@ -68,7 +68,7 @@ class Hero extends Component {
             </p>
             <p>
               Drive time: <code>{this.state.travelTime}</code> min. from
-              I70/C470 (Golden)
+              I-70/C470 (Golden)
             </p>
             <p>A great day to ride a bike!</p>
           </div>
@@ -96,9 +96,9 @@ class Hero extends Component {
             <Map />
           </div>
           <div className="trail-areas-container">
-            <TrailsAreaPreview title="Vail" area="Vail, Colorado" />
-            <TrailsAreaPreview title="Avon" area="Avon, Colorado" />
-            <TrailsAreaPreview title="Minturn" area="Minturn, Colorado" />
+            <TrailsAreaPreview area="vail" />
+            <TrailsAreaPreview area="avon" />
+            <TrailsAreaPreview area="minturn" />
           </div>
         </Element>
       </div>
