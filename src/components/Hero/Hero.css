@@ -55,7 +55,19 @@
 }
 
 .trails {
-  height: 100vh;
+  height: 100%;
+  display: flex;
+  padding-top: 2em;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.map-container {
+  height: 300px;
+  width: 300px;
+  margin: 0 2em 0 0;
+  position: sticky;
+  top: 2em;
 }
 
 .hero-text {
@@ -76,4 +88,8 @@ code {
 
 p {
   margin-bottom: 0.3em;
+}
+
+.trail-areas-container {
+  width: 100%;
 }
