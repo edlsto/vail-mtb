@@ -25,7 +25,6 @@ const getTrails = (area, trails) => {
 
 const TrailsAreaPreview = ({ trails, area }) => {
   const title = area.charAt(0).toUpperCase() + area.substr(1);
-  console.log(area);
   const cards = getTrails(title, trails);
   return (
     <div className="trail-area-container">
