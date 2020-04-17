@@ -1,0 +1,24 @@
+.trail-area-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.trail-cards-area-preview-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-link-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.area-link {
+  border-bottom: 1px solid #4a79d6;
+  margin-bottom: 5px;
+  color: #4a79d6;
+  text-decoration: none;
+}
