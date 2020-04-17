@@ -1,0 +1,56 @@
+.trail-card {
+  width: 15em;
+  border: 1px solid gray;
+  margin-right: 1em;
+  flex-grow: 1;
+  /* height: 16em; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trail-card:last-child {
+  margin-right: 0;
+}
+
+.trail-card-img {
+  width: 100%;
+  height: 12em;
+  object-fit: cover;
+}
+
+.trail-card-info {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  flex-grow: 1;
+  padding: 1em;
+}
+
+.diamond {
+  transform: rotate(45deg);
+}
+
+.square {
+  color: blue;
+}
+
+.fa-square-full {
+  margin-left: 0.2em;
+}
+
+.name-rating-container {
+  flex: 0 0 70%;
+}
+
+.trail-card-rating {
+  margin-top: 0.5em;
+}
+
+.trail-card-link {
+  align-self: flex-start;
+}
+
+.trail-card-name {
+  font-weight: 500;
+}
