@@ -1,0 +1,8 @@
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.leaflet-marker-icon {
+  outline: none;
+}
