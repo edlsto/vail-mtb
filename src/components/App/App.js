@@ -2,13 +2,43 @@ import React, { Component } from "react";
 import "./App.css";
 import Hero from "../Hero/Hero";
 import Header from "../Header/Header";
+import { Route } from "react-router-dom";
+import TrailsAreaPreview from "../TrailsAreaPreview/TrailsAreaPreview";
+import Area from "../Area/Area";
+import TrailDetails from "../TrailDetails/TrailDetails";
 
 class App extends Component {
   render() {
     return (
       <div className="app">
         <Header />
-        <Hero />
+        <Route
+          exact
+          path="/"
+          render={({ match }) => {
+            const { id } = match.params;
+            return <Hero />;
+          }}
+        >
+          <Hero />
+        </Route>
+        <Route
+          exact
+          path="/areas/:area"
+          render={({ match }) => {
+            const { area } = match.params;
+            console.log(area);
+            return <Area area={area} />;
+          }}
+        ></Route>
+        <Route
+          exact
+          path="/areas/:area/trails/:id"
+          render={({ match }) => {
+            const { area, id } = match.params;
+            return <TrailDetails area={area} id={id} />;
+          }}
+        ></Route>
       </div>
     );
   }

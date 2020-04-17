@@ -27,7 +27,7 @@ const TrailCard = (props) => {
           </div>
         </div>
         <Link
-          to={"/" + props.location.toLowerCase() + "/" + props.id}
+          to={"/areas/" + props.location.toLowerCase() + "/trails/" + props.id}
           className="trail-card-link area-link"
         >
           More <i class="fas fa-arrow-right"></i>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const getTrails = (area, trails) => {
   const areaTrails = trails
-    .filter((trail) => trail.location === area)
+    .filter((trail) => trail.location === area + ", Colorado")
     .slice(0, 3);
   const cards = areaTrails.map((trail) => {
     return (
@@ -23,22 +23,17 @@ const getTrails = (area, trails) => {
   return cards;
 };
 
-const TrailsAreaPreview = ({
-  trails,
-  title,
-  area,
-  imgMedium,
-  difficulty,
-  length,
-}) => {
-  const cards = getTrails(area, trails);
+const TrailsAreaPreview = ({ trails, area }) => {
+  const title = area.charAt(0).toUpperCase() + area.substr(1);
+  console.log(area);
+  const cards = getTrails(title, trails);
   return (
     <div className="trail-area-container">
       <div className="title-link-container">
         <div className="title">
           <h2>{title}</h2>
         </div>
-        <Link to={"/" + title.toLowerCase()} className="area-link">
+        <Link to={"/areas/" + area} className="area-link">
           See more <i class="fas fa-arrow-right"></i>
         </Link>
       </div>

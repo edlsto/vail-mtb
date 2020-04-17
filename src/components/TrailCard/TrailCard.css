@@ -29,6 +29,7 @@
 
 .diamond {
   transform: rotate(45deg);
+  margin-right: 0.15em;
 }
 
 .square {
