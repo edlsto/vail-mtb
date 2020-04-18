@@ -32,6 +32,14 @@ class App extends Component {
         ></Route>
         <Route
           exact
+          path="/favorites"
+          render={({ match, history }) => {
+            const { pathname } = history.location;
+            return <Area pathname={pathname} />;
+          }}
+        ></Route>
+        <Route
+          exact
           path="/areas/:area/trails/:id"
           render={({ match }) => {
             const { area, id } = match.params;
