@@ -1,17 +1,20 @@
 import React from "react";
 import "./Area.css";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 import TrailCard from "../TrailCard/TrailCard";
 
 const Area = ({ trails, area }) => {
   const title = area.charAt(0).toUpperCase() + area.substr(1);
 
-  const filteredTrails = trails.filter((trail) => {
-    console.log(area);
+  let filteredTrails = trails;
+  if (area !== "all") {
+    filteredTrails = trails.filter((trail) => {
+      return trail.location === title + ", Colorado";
+    });
+  }
 
-    return trail.location === title + ", Colorado";
-  });
-  console.log(filteredTrails);
   const cards = filteredTrails.map((trail) => {
     return (
       <TrailCard
@@ -26,7 +29,32 @@ const Area = ({ trails, area }) => {
   });
   return (
     <div className="area-cards-container">
-      <div className="area-title">{title} trails</div>
+      <div className="areas-btns">
+        <Link
+          to="/areas/vail"
+          className={`vail-btn area-btn ${area === "vail" ? "active" : ""}`}
+        >
+          Vail
+        </Link>
+        <Link
+          to="/areas/avon"
+          className={`vail-btn area-btn ${area === "avon" ? "active" : ""}`}
+        >
+          Avon
+        </Link>
+        <Link
+          to="/areas/minturn"
+          className={`vail-btn area-btn ${area === "minturn" ? "active" : ""}`}
+        >
+          Minturn
+        </Link>
+        <Link
+          to="/areas/all"
+          className={`vail-btn area-btn ${area === "all" ? "active" : ""}`}
+        >
+          All
+        </Link>
+      </div>
       <div className="area-trails-container">{cards}</div>
     </div>
   );
