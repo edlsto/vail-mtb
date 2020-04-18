@@ -8,6 +8,9 @@ const Header = () => {
       <Link to="/" className="text">
         vAiL mTb
       </Link>
+      <Link to="/favorites" className="favorites-btn" type="button">
+        Favorites
+      </Link>
     </header>
   );
 };
