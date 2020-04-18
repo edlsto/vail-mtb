@@ -1,6 +1,9 @@
 import React from "react";
 import "./TrailCard.css";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { addFavorite } from "../../actions";
+import { deleteFavorite } from "../../actions";
 
 const getIcon = (difficulty) => {
   switch (difficulty) {
@@ -15,10 +18,35 @@ const getIcon = (difficulty) => {
   }
 };
 
+const toggleFavorite = (id, props) => {
+  if (!props.favorites.includes(id)) {
+    props.addFavorite(id);
+  } else {
+    props.deleteFavorite(id);
+  }
+};
+
+const addDefaultSrc = (ev) => {
+  ev.target.src = "http://placecorgi.com/260/180";
+};
+
 const TrailCard = (props) => {
   return (
     <div className="trail-card">
-      <img className="trail-card-img" src={props.imgMedium} alt={props.name} />
+      <div className="trail-card-img-container">
+        <img
+          className="trail-card-img"
+          src={props.imgMedium}
+          alt={props.name}
+          onError={(e) => addDefaultSrc(e)}
+        />
+        <i
+          className={`fas fa-heart fa-2x ${
+            props.favorites.includes(props.id) ? "favorite" : ""
+          }`}
+          onClick={() => toggleFavorite(props.id, props)}
+        ></i>
+      </div>
       <div className="trail-card-info">
         <div className="name-rating-container">
           <div className="trail-card-name">{props.name}</div>
@@ -30,11 +58,17 @@ const TrailCard = (props) => {
           to={"/areas/" + props.location.toLowerCase() + "/trails/" + props.id}
           className="trail-card-link area-link"
         >
-          More <i class="fas fa-arrow-right"></i>
+          More <i className="fas fa-arrow-right"></i>
         </Link>
       </div>
     </div>
   );
 };
 
-export default TrailCard;
+const mapStateToProps = ({ favorites }) => ({ favorites });
+const mapDispatchToProps = (dispatch) => ({
+  addFavorite: (id) => dispatch(addFavorite(id)),
+  deleteFavorite: (id) => dispatch(deleteFavorite(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrailCard);
