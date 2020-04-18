@@ -1,6 +1,5 @@
 .area-cards-container {
-  width: 85%;
-  margin: 2em auto;
+  width: 50%;
 }
 
 .area-trails-container {
@@ -38,4 +37,27 @@
 .active {
   background: #82cd97;
   color: black;
+}
+
+.no-favorites {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10em;
+  font-size: 2em;
+}
+
+.area-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 3em 0;
+}
+
+.area-map-container {
+  height: 500px;
+  width: 300px;
+  margin: 0 2em 0 0;
+  position: sticky;
+  top: 2em;
 }
