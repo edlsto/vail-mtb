@@ -27,7 +27,6 @@ class App extends Component {
           path="/areas/:area"
           render={({ match }) => {
             const { area } = match.params;
-            console.log(area);
             return <Area area={area} />;
           }}
         ></Route>
