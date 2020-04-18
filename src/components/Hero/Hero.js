@@ -4,6 +4,8 @@ import { getTrails } from "../../actions";
 import { connect } from "react-redux";
 import { fetchTrails } from "../../ApiCalls";
 import Down from "../../assets/down.png";
+import { Link as DomLink } from "react-router-dom";
+
 import * as Scroll from "react-scroll";
 import {
   Link,
@@ -81,20 +83,16 @@ class Hero extends Component {
             >
               <img className="arrow" src={Down}></img>
             </Link>
-            <Link
-              className="explore-trails"
-              to="trails"
-              spy={true}
-              smooth={true}
-            >
-              Explore trails
-            </Link>
           </div>
         </div>
         <Element className="trails" name="trails">
+          <DomLink className="explore-trails" to="/areas/all">
+            Explore all trails
+          </DomLink>
           <div className="trail-areas-container">
             <TrailsAreaPreview area="vail" />
             <TrailsAreaPreview area="avon" />
+            <TrailsAreaPreview area="eagle" />
             <TrailsAreaPreview area="minturn" />
           </div>
         </Element>

@@ -3,6 +3,8 @@ import "./TrailDetails.css";
 import { connect } from "react-redux";
 import Map from "../Map/Map";
 import { fetchTrail } from "../../ApiCalls";
+import { addFavorite } from "../../actions";
+import { deleteFavorite } from "../../actions";
 
 class TrailDetails extends Component {
   constructor(props) {
@@ -14,7 +16,6 @@ class TrailDetails extends Component {
 
   async componentDidMount() {
     const result = await fetchTrail(this.props.id);
-    console.log(result[0]);
     this.setState({
       selectedTrail: result[0],
     });
@@ -24,21 +25,103 @@ class TrailDetails extends Component {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  toggleFavorite = (id, props) => {
+    if (!props.favorites.includes(id)) {
+      props.addFavorite(id);
+    } else {
+      props.deleteFavorite(id);
+    }
+  };
+
   render() {
     const selectedTrail = this.state.selectedTrail;
-    console.log(selectedTrail);
     return (
       <div className="trail-detail-card">
         <div className="trail-stats-container">
           <div className="details-title">
             {selectedTrail && selectedTrail.name}
           </div>
+          <div className="stars-heart">
+            {selectedTrail && (
+              <div className="stars">
+                <i
+                  className={`${
+                    selectedTrail.stars > 0.25 ? "fas" : "far"
+                  } fa-2x fa-star-half`}
+                ></i>
+                <i
+                  className={`${
+                    selectedTrail.stars > 0.75 ? "fas" : "far"
+                  } fa-2x fa-star-half star-right star-2`}
+                ></i>
+                <span className="whole-star-1">
+                  <i
+                    className={`${
+                      selectedTrail.stars > 1.25 ? "fas" : "far"
+                    } fa-2x fa-star-half`}
+                  ></i>
+                  <i
+                    className={`${
+                      selectedTrail.stars > 1.75 ? "fas" : "far"
+                    } fa-2x fa-star-half star-right`}
+                  ></i>
+                </span>
+                <span className="whole-star-2">
+                  <i
+                    className={`${
+                      selectedTrail.stars > 2.25 ? "fas" : "far"
+                    } fa-2x fa-star-half`}
+                  ></i>
+                  <i
+                    className={`${
+                      selectedTrail.stars > 2.75 ? "fas" : "far"
+                    } fa-2x fa-star-half star-right`}
+                  ></i>
+                </span>
+                <span className="whole-star-3">
+                  <i
+                    className={`${
+                      selectedTrail.stars > 3.25 ? "fas" : "far"
+                    } fa-2x fa-star-half`}
+                  ></i>
+                  <i
+                    className={`${
+                      selectedTrail.stars > 3.75 ? "fas" : "far"
+                    } fa-2x fa-star-half star-right`}
+                  ></i>
+                </span>
+                <span className="whole-star-4">
+                  <i
+                    className={`${
+                      selectedTrail.stars > 4.25 ? "fas" : "far"
+                    } fa-2x fa-star-half`}
+                  ></i>
+                  <i
+                    className={`${
+                      selectedTrail.stars > 4.75 ? "fas" : "far"
+                    } fa-2x fa-star-half star-right`}
+                  ></i>
+                </span>
+                <p className="num-votes">({selectedTrail.starVotes} votes)</p>
+              </div>
+            )}
+            <i
+              className={` fa-heart fa-2x heart-details ${
+                this.props.favorites.includes(parseInt(this.props.id))
+                  ? "fas"
+                  : "far"
+              }`}
+              onClick={() =>
+                this.toggleFavorite(parseInt(this.props.id), this.props)
+              }
+            ></i>
+          </div>
           <div className="details-summary">
             {selectedTrail && selectedTrail.summary}
           </div>
           <div className="stats-map-container">
             <div className="map-container-details">
-              <Map selectedTrail={selectedTrail} />
+              <Map selectedTrail={[selectedTrail]} />
             </div>
             <div className="secondary-stats-container">
               <div className="details-length details-item">
@@ -55,7 +138,22 @@ class TrailDetails extends Component {
                   this.numberWithCommas(Math.abs(selectedTrail.descent))}{" "}
                 feet
               </div>
-              <button className="more-info">More info</button>
+              <div className="details-descent details-item">
+                Elevation:{" "}
+                {selectedTrail &&
+                  this.numberWithCommas(Math.abs(selectedTrail.low))}
+                {" to "}
+                {selectedTrail &&
+                  this.numberWithCommas(Math.abs(selectedTrail.high))}{" "}
+                feet
+              </div>
+
+              <a
+                className="more-info-link"
+                href={selectedTrail && selectedTrail.url}
+              >
+                <button className="more-info">More info</button>
+              </a>
             </div>
           </div>
         </div>
@@ -71,8 +169,14 @@ class TrailDetails extends Component {
   }
 }
 
-const mapStateToProps = ({ trails }) => ({
+const mapStateToProps = ({ trails, favorites }) => ({
   trails,
+  favorites,
 });
 
-export default connect(mapStateToProps)(TrailDetails);
+const mapDispatchToProps = (dispatch) => ({
+  addFavorite: (id) => dispatch(addFavorite(id)),
+  deleteFavorite: (id) => dispatch(deleteFavorite(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrailDetails);

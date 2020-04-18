@@ -23,7 +23,7 @@
 }
 
 .details-summary {
-  margin: 1.5em 0;
+  margin: 1em 0 1.5em;
   font-size: 1.5em;
 }
 
@@ -34,6 +34,17 @@
   font-size: 1em;
   display: block;
   margin-top: 2em;
+  outline: none;
+  cursor: pointer;
+}
+
+.more-info:hover {
+  background: green;
+}
+
+.more-info-link {
+  text-decoration: none;
+  color: black;
 }
 
 .details-item {
@@ -52,4 +63,53 @@
 
 .trail-stats-container {
   flex: 1 1 50%;
+}
+
+.heart-details {
+  color: red;
+  cursor: pointer;
+}
+
+.stars {
+  position: relative;
+  width: 15em;
+}
+
+.fa-star-half {
+  color: gold;
+}
+
+.stars-heart {
+  display: flex;
+  margin-top: 0.5em;
+  justify-content: space-between;
+  padding-right: 3em;
+}
+
+.star-right {
+  transform: scale(-1, 1);
+  right: 37px;
+  position: relative;
+}
+
+.whole-star-1 {
+  position: absolute;
+  left: 37px;
+}
+
+.whole-star-2 {
+  position: absolute;
+  left: 74px;
+}
+.whole-star-3 {
+  position: absolute;
+  left: 111px;
+}
+.whole-star-4 {
+  position: absolute;
+  left: 148px;
+}
+
+.num-votes {
+  margin-top: 0.5em;
 }

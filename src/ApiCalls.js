@@ -1,6 +1,6 @@
 export const fetchTrails = () => {
   return fetch(
-    `https://www.mtbproject.com/data/get-trails?lat=39.608581&lon=-106.448480&maxDistance=5&maxResults=40&key=200333709-${process.env.REACT_APP_MTBPROJECT_API_KEY}`
+    `https://www.mtbproject.com/data/get-trails?lat=39.5764&lon=-106.7235&maxDistance=25&maxResults=70&key=200333709-${process.env.REACT_APP_MTBPROJECT_API_KEY}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -67,6 +67,7 @@ export const fetchTrail = (id) => {
           low,
           latitude,
           longitude,
+          starVotes,
         }) => {
           return {
             id,
@@ -84,6 +85,7 @@ export const fetchTrail = (id) => {
             low,
             lat: latitude,
             lng: longitude,
+            starVotes,
           };
         }
       );

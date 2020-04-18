@@ -40,13 +40,12 @@ class SimpleExample extends Component {
 
   render() {
     let trails;
-    if (this.props.selectedTrail) {
-      trails = [this.props.selectedTrail];
+    if (this.props.selectedTrail && this.props.selectedTrail[0]) {
+      trails = this.props.selectedTrail;
     } else {
       trails = this.props.trails;
     }
     let bounds;
-    console.log(trails[0]);
     if (trails.length) {
       bounds = latLngBounds(
         [trails[0].lat, trails[0].lng],

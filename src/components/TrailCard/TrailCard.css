@@ -1,12 +1,10 @@
 .trail-card {
-  width: 15em;
   border: 1px solid gray;
   margin-right: 1em;
-  flex-grow: 1;
-  /* height: 16em; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex: 1 0 30%;
 }
 
 .trail-card:last-child {
@@ -36,6 +34,10 @@
   color: blue;
 }
 
+.circle {
+  color: green;
+}
+
 .fa-square-full {
   margin-left: 0.2em;
 }
@@ -60,7 +62,7 @@
   position: relative;
 }
 
-.fa-heart {
+.card-heart {
   position: absolute;
   bottom: 0.5em;
   right: 0.5em;
