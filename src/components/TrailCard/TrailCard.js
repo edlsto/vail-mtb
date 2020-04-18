@@ -8,7 +8,7 @@ import { deleteFavorite } from "../../actions";
 const getIcon = (difficulty) => {
   switch (difficulty) {
     case "green":
-      return <i class="fas fa-circle"></i>;
+      return <i class="fas fa-circle circle"></i>;
     case "blue":
       return <i class="fas fa-square-full square"></i>;
     case "black":
@@ -41,7 +41,7 @@ const TrailCard = (props) => {
           onError={(e) => addDefaultSrc(e)}
         />
         <i
-          className={`fas fa-heart fa-2x ${
+          className={`fas fa-heart fa-2x card-heart ${
             props.favorites.includes(props.id) ? "favorite" : ""
           }`}
           onClick={() => toggleFavorite(props.id, props)}
