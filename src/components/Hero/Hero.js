@@ -92,9 +92,6 @@ class Hero extends Component {
           </div>
         </div>
         <Element className="trails" name="trails">
-          <div className="map-container">
-            <Map />
-          </div>
           <div className="trail-areas-container">
             <TrailsAreaPreview area="vail" />
             <TrailsAreaPreview area="avon" />
