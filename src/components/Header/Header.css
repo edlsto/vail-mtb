@@ -1,6 +1,9 @@
 header {
   height: 80px;
   background: #82cd97;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .text {
@@ -9,6 +12,19 @@ header {
   font-size: 3em;
   padding: 0.3em;
   display: inline-block;
+  text-decoration: none;
+  color: black;
+}
+
+.favorites-btn {
+  background: white;
+  border: 1px solid black;
+  padding: 1em;
+  font-size: 1em;
+  text-transform: uppercase;
+  margin-right: 1em;
+  cursor: pointer;
+  outline: none;
   text-decoration: none;
   color: black;
 }
