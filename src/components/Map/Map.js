@@ -11,7 +11,7 @@ class SimpleExample extends Component {
     this.state = {
       lat: 39.742043,
       lng: -104.991531,
-      zoom: 15,
+      zoom: 10,
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
@@ -39,19 +39,25 @@ class SimpleExample extends Component {
   };
 
   render() {
+    let trails;
+    if (this.props.selectedTrail) {
+      trails = [this.props.selectedTrail];
+    } else {
+      trails = this.props.trails;
+    }
     let bounds;
-    if (this.props.trails[0]) {
+    console.log(trails[0]);
+    if (trails.length) {
       bounds = latLngBounds(
-        [this.props.trails[0].lat, this.props.trails[0].lng],
-        [this.props.trails[0].lat, this.props.trails[0].lng]
+        [trails[0].lat, trails[0].lng],
+        [trails[0].lat, trails[0].lng]
       );
-      this.props.trails.forEach((trail) => {
+      trails.forEach((trail) => {
         bounds.extend([trail.lat, trail.lng]);
       });
     }
-
     const position = [this.state.lat, this.state.lng];
-    const markers = this.props.trails.map((trail) => {
+    const markers = trails.map((trail) => {
       return (
         <Marker
           position={[trail.lat, trail.lng]}
@@ -66,13 +72,13 @@ class SimpleExample extends Component {
     return (
       <Map
         center={position}
-        zoom={this.state.zoom}
         bounds={bounds}
         onClick={this.onMapClicked}
+        maxZoom={15}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+          url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
         />
         {markers}
       </Map>
