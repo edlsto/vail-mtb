@@ -45,29 +45,24 @@
 }
 
 .explore-trails {
-  width: 10em;
-  background: white;
-  bottom: 1em;
+  font-size: 1em;
+  background: #82cd97;
   padding: 1em;
   text-transform: uppercase;
   cursor: pointer;
-  margin-top: 1em;
+  margin: 0 auto 3em;
+  display: block;
+  width: 13em;
+  text-align: center;
+  text-decoration: none;
+  color: black;
 }
 
 .trails {
   height: 100%;
-  display: flex;
-  padding-top: 5em;
-  width: 60%;
+  padding-top: 3em;
+  width: 70%;
   margin: 0 auto;
-}
-
-.map-container {
-  height: 300px;
-  width: 300px;
-  margin: 0 2em 0 0;
-  position: sticky;
-  top: 2em;
 }
 
 .hero-text {
