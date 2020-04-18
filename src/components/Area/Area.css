@@ -15,3 +15,27 @@
   margin-bottom: 0.5em;
   font-size: 3em;
 }
+
+.areas-btns {
+  display: flex;
+  margin-bottom: 1em;
+}
+
+.area-btn {
+  padding: 0.5em;
+  border: 2px solid #82cd97;
+  border-radius: 0.5em;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: 500;
+  margin-right: 1em;
+  color: #82cd97;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+}
+
+.active {
+  background: #82cd97;
+  color: black;
+}

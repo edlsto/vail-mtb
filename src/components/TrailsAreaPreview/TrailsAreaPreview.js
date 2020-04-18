@@ -33,7 +33,7 @@ const TrailsAreaPreview = ({ trails, area }) => {
           <h2>{title}</h2>
         </div>
         <Link to={"/areas/" + area} className="area-link">
-          See more <i class="fas fa-arrow-right"></i>
+          See more {title} trails <i class="fas fa-arrow-right"></i>
         </Link>
       </div>
       <div className="trail-cards-area-preview-container">{cards}</div>

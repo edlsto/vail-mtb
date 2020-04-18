@@ -55,3 +55,19 @@
 .trail-card-name {
   font-weight: 500;
 }
+
+.trail-card-img-container {
+  position: relative;
+}
+
+.fa-heart {
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+  color: white;
+  cursor: pointer;
+}
+
+.favorite {
+  color: red;
+}

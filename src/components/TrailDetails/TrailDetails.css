@@ -1,28 +1,21 @@
-.trail-details {
-  background: lightgray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  width: 100%;
-}
-
 .trail-detail-card {
-  width: 100%;
-  min-height: 20em;
   display: flex;
   justify-content: space-around;
   background: white;
-  padding: 3em;
   overflow: hidden;
+  width: 90%;
+  margin: 3em auto;
 }
 
 .details-photo {
   height: 30em;
-  width: 100%;
   object-fit: cover;
   margin-left: 2em;
-  min-width: 300px;
+  width: 100%;
+}
+
+.img-container {
+  flex: 1 1 50%;
 }
 
 .details-title {
@@ -58,5 +51,5 @@
 }
 
 .trail-stats-container {
-  flex: 1 0 50%;
+  flex: 1 1 50%;
 }

@@ -1,7 +1,14 @@
 header {
-  background: #82cd97;
   height: 80px;
+  background: #82cd97;
+}
+
+.text {
   font-family: "Major Mono Display";
+  cursor: pointer;
   font-size: 3em;
   padding: 0.3em;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
 }
