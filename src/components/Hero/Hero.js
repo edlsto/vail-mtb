@@ -38,11 +38,78 @@ class Hero extends Component {
     return Math.floor(celsius * (9 / 5) + 32);
   };
 
-  getWeatherBlurb = (code, temp) => {
-    if (code < 800 || temp < 50) {
+  getWeatherStatus = (code, temp) => {
+    if (this.state.weatherCode < 800 || this.state.tempForecast < 50) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
+  getWeatherBlurb = () => {
+    if (this.getWeatherStatus() === 1) {
       return "(Looks like less-than-ideal weather for biking)";
     } else {
       return "Great weather for biking!";
+    }
+  };
+
+  getWeatherIconColor = () => {
+    if (this.getWeatherStatus() === 1) {
+      return "red";
+    } else {
+      return "green";
+    }
+  };
+
+  getWeatherIcon = () => {
+    const weatherCode = this.state.weatherCode;
+    if ((weatherCode >= 300) & (weatherCode <= 531)) {
+      return "umbrella";
+    } else if ((weatherCode >= 200) & (weatherCode <= 232)) {
+      return "bolt";
+    } else if ((weatherCode >= 600) & (weatherCode <= 622)) {
+      return "snowflake";
+    } else if ((weatherCode >= 800) & (weatherCode <= 804)) {
+      return "cloud";
+    } else if (
+      (weatherCode >= 700 && weatherCode <= 781) ||
+      weatherCode > 800
+    ) {
+      return "cloud";
+    }
+  };
+
+  getTrailsStatus = () => {
+    const trailsOpenNum = this.countOpenTrails();
+    if (trailsOpenNum > 10) {
+      return 0;
+    } else if (trailsOpenNum > 0) {
+      return 1;
+    } else {
+      return 2;
+    }
+  };
+
+  getTrailsBlurb = (trails) => {
+    const openTrailsNumber = trails.filter(
+      (trail) => trail.conditionStatus === "All Clear"
+    ).length;
+    const closedTrailsNumber = trails.length - openTrailsNumber;
+    return (
+      <div>
+        (<code>{closedTrailsNumber}</code> trails are not reported open)
+      </div>
+    );
+  };
+
+  getTrailsIconColor = () => {
+    if (this.getTrailsStatus() > 10) {
+      return "green";
+    } else if (this.getTrailsStatus() > 0) {
+      return "yellow";
+    } else {
+      return "red";
     }
   };
 
@@ -77,8 +144,61 @@ class Hero extends Component {
       });
   };
 
+  countOpenTrails = () => {
+    return this.props.trails.filter(
+      (trail) => trail.conditionStatus === "All Clear"
+    ).length;
+  };
+
+  getTrafficStatus = () => {
+    const travelTime = this.state.travelTime;
+    if (travelTime && travelTime <= 95) {
+      return 0;
+    } else if (travelTime > 95 && travelTime < 110) {
+      return 1;
+    } else if (travelTime >= 110) {
+      return 2;
+    }
+  };
+
+  getTrafficIconColor = (minutes) => {
+    if (this.getTrafficStatus() === 0) {
+      return "green";
+    } else if (this.getTrafficStatus() === 1) {
+      return "yellow";
+    } else if (this.getTrafficStatus() === 2) {
+      return "red";
+    }
+  };
+
+  getRideStatus = () => {
+    console.log(
+      this.getWeatherStatus(),
+      this.getTrailsStatus(),
+      this.getTrafficStatus()
+    );
+    if (
+      this.getWeatherStatus() > 0 ||
+      this.getTrailsStatus() > 1 ||
+      this.getTrafficStatus() > 1
+    ) {
+      return "bad";
+    } else if (
+      this.getWeatherStatus() === 0 &&
+      this.getTrailsStatus() <= 1 &&
+      this.getTrafficStatus() <= 1
+    ) {
+      return "OK";
+    } else if (
+      this.getWeatherStatus() === 0 &&
+      this.getTrailsStatus() === 0 &&
+      this.getTrafficStatus() <= 1
+    ) {
+      return "great";
+    }
+  };
+
   handleAreaChange = (event) => {
-    console.log(event.target.value);
     this.setState(
       { forecastArea: event.target.value },
       this.getWeather(event.target.value)
@@ -92,7 +212,7 @@ class Hero extends Component {
     } else if (event.target.value === "tomorrow") {
       forecastIndex = 1;
     } else {
-      var time = moment().toDate(); // This will return a copy of the Date that the moment uses
+      var time = moment().toDate();
 
       time.setHours(0);
       time.setMinutes(0);
@@ -154,103 +274,139 @@ class Hero extends Component {
       );
   }
   render() {
+    console.log(this.getRideStatus());
     return (
       <div>
         <div className="hero">
           <div className="hero-text">
-            <div className="weather hero-text-section">
-              <p>
-                <select
-                  name="areas"
-                  id="area-select"
-                  className="select-menu"
-                  style={{
-                    width: `${this.widthOfString(
-                      this.state.forecastArea + 30
-                    )}px`,
-                  }}
-                  onChange={(event) => {
-                    this.handleAreaChange(event);
-                  }}
-                  value={this.state.forecastArea}
-                >
-                  <option value="vail">Vail</option>
-                  <option value="eagle">Eagle</option>
-                </select>{" "}
-                forecast for{" "}
-                <select
-                  name="days"
-                  id="day-select"
-                  className="select-menu"
-                  style={{
-                    width: `${this.widthOfString(
-                      this.state.selectedOption.split(", ")[0] + 30
-                    )}px`,
-                  }}
-                  onChange={(event) => {
-                    this.handleChange(event);
-                  }}
-                  value={this.state.selectedOption}
-                >
-                  <option value="today">today</option>
-                  <option value="tomorrow">tomorrow</option>
-                  <option
-                    value={moment()
-                      .local()
-                      .add(2, "d")
-                      .format("dddd, MMM. D, YYYY")}
-                  >
-                    {moment().local().add(2, "d").format("dddd")}
-                  </option>
-                  <option
-                    value={moment()
-                      .local()
-                      .add(3, "d")
-                      .format("dddd, MMM. D, YYYY")}
-                  >
-                    {moment().local().add(3, "d").format("dddd")}
-                  </option>
-                  <option
-                    value={moment()
-                      .local()
-                      .add(4, "d")
-                      .format("dddd, MMM. D, YYYY")}
-                  >
-                    {moment().local().add(4, "d").format("dddd")}
-                  </option>
-                  <option
-                    value={moment()
-                      .local()
-                      .add(5, "d")
-                      .format("dddd, MMM. D, YYYY")}
-                  >
-                    {moment().local().add(5, "d").format("dddd")}
-                  </option>
-                </select>
-                : A high of <code>{this.state.tempForecast}</code> degrees with{" "}
-                <code>{this.state.weatherForecast}</code>.
-              </p>
-              <p className="analysis">
-                {this.getWeatherBlurb(
-                  this.state.weatherCode,
-                  this.state.tempForecast
-                )}
-              </p>
+            <div className="ride-status">
+              <h2>
+                It's a <code>{this.getRideStatus()}</code> day to go ride your
+                bike in Vail!
+              </h2>
             </div>
-            <div className="drive-time hero-text-section">
-              <p>
-                Drive time: <code>{this.state.travelTime}</code> min. from
-                I-70/C470 (Golden)
-              </p>
-
-              {this.state.travelTime < 100 ? (
-                <p className="analysis">(That's a pretty quick trip!)</p>
-              ) : (
+            <div className="hero-text-sections">
+              <div className="hero-text-section open-trails">
+                <div
+                  className={`hero-icon-wrapper ${this.getTrailsIconColor()}`}
+                >
+                  <i className="fas fa-bicycle hero-icon"></i>
+                </div>
                 <p>
-                  (Expect about <code>{this.state.travelTime - 100}</code>{" "}
-                  minutes of delays)
+                  <code>{this.countOpenTrails(this.props.trails)}</code>
+                  {this.countOpenTrails(this.props.trails) > 1 || 0
+                    ? " trails are"
+                    : " trail is"}{" "}
+                  reported open in the Eagle County area
                 </p>
-              )}
+                <p className="analysis">
+                  {this.getTrailsBlurb(this.props.trails)}
+                </p>
+              </div>
+
+              <div className="weather hero-text-section">
+                <div
+                  className={`hero-icon-wrapper ${this.getWeatherIconColor()}`}
+                >
+                  <i
+                    className={`fas fa-${this.getWeatherIcon()} hero-icon`}
+                  ></i>
+                </div>
+                <p>
+                  <select
+                    name="areas"
+                    id="area-select"
+                    className="select-menu"
+                    style={{
+                      width: `${this.widthOfString(
+                        this.state.forecastArea + 30
+                      )}px`,
+                    }}
+                    onChange={(event) => {
+                      this.handleAreaChange(event);
+                    }}
+                    value={this.state.forecastArea}
+                  >
+                    <option value="vail">Vail</option>
+                    <option value="eagle">Eagle</option>
+                  </select>{" "}
+                  forecast for{" "}
+                  <select
+                    name="days"
+                    id="day-select"
+                    className="select-menu"
+                    style={{
+                      width: `${this.widthOfString(
+                        this.state.selectedOption.split(", ")[0] + 30
+                      )}px`,
+                    }}
+                    onChange={(event) => {
+                      this.handleChange(event);
+                    }}
+                    value={this.state.selectedOption}
+                  >
+                    <option value="today">today</option>
+                    <option value="tomorrow">tomorrow</option>
+                    <option
+                      value={moment()
+                        .local()
+                        .add(2, "d")
+                        .format("dddd, MMM. D, YYYY")}
+                    >
+                      {moment().local().add(2, "d").format("dddd")}
+                    </option>
+                    <option
+                      value={moment()
+                        .local()
+                        .add(3, "d")
+                        .format("dddd, MMM. D, YYYY")}
+                    >
+                      {moment().local().add(3, "d").format("dddd")}
+                    </option>
+                    <option
+                      value={moment()
+                        .local()
+                        .add(4, "d")
+                        .format("dddd, MMM. D, YYYY")}
+                    >
+                      {moment().local().add(4, "d").format("dddd")}
+                    </option>
+                    <option
+                      value={moment()
+                        .local()
+                        .add(5, "d")
+                        .format("dddd, MMM. D, YYYY")}
+                    >
+                      {moment().local().add(5, "d").format("dddd")}
+                    </option>
+                  </select>
+                  : A high of <code>{this.state.tempForecast}</code> degrees
+                  with <code>{this.state.weatherForecast}</code>.
+                </p>
+                <p className="analysis">{this.getWeatherBlurb()}</p>
+              </div>
+              <div className="drive-time hero-text-section">
+                <div
+                  className={`hero-icon-wrapper ${this.getTrafficIconColor(
+                    this.state.travelTime
+                  )}`}
+                >
+                  <i className="fas fa-car hero-icon"></i>
+                </div>
+                <p>
+                  Drive time: <code>{this.state.travelTime}</code> minutes from{" "}
+                  <nobr>I-70/C470</nobr> (Golden)
+                </p>
+
+                {this.state.travelTime < 95 ? (
+                  <p className="analysis">(That's a pretty quick trip!)</p>
+                ) : (
+                  <p className="analysis">
+                    (Expect about <code>{this.state.travelTime - 95}</code>{" "}
+                    minutes of delays)
+                  </p>
+                )}
+              </div>
             </div>
           </div>
           <div className="nav-down">
