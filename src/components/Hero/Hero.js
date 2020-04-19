@@ -29,7 +29,7 @@ class Hero extends Component {
   widthOfString = (str) => {
     var canvas = document.createElement("canvas");
     var ctx = canvas.getContext("2d");
-    ctx.font = "36.8px Rubik";
+    ctx.font = "32px Rubik";
     var width = ctx.measureText(str).width;
     return width;
   };
@@ -48,7 +48,7 @@ class Hero extends Component {
 
   getWeatherBlurb = () => {
     if (this.getWeatherStatus() === 1) {
-      return "(Looks like less-than-ideal weather for biking)";
+      return "(Not the best weather for biking)";
     } else {
       return "Great weather for biking!";
     }
@@ -81,7 +81,7 @@ class Hero extends Component {
   };
 
   getTrailsStatus = () => {
-    const trailsOpenNum = this.countOpenTrails();
+    const trailsOpenNum = this.countOpenTrails()[0];
     if (trailsOpenNum > 10) {
       return 0;
     } else if (trailsOpenNum > 0) {
@@ -92,10 +92,7 @@ class Hero extends Component {
   };
 
   getTrailsBlurb = (trails) => {
-    const openTrailsNumber = trails.filter(
-      (trail) => trail.conditionStatus === "All Clear"
-    ).length;
-    const closedTrailsNumber = trails.length - openTrailsNumber;
+    const closedTrailsNumber = this.countOpenTrails()[1];
     return (
       <div>
         (<code>{closedTrailsNumber}</code> trails are not reported open)
@@ -104,9 +101,9 @@ class Hero extends Component {
   };
 
   getTrailsIconColor = () => {
-    if (this.getTrailsStatus() > 10) {
+    if (this.getTrailsStatus() === 0) {
       return "green";
-    } else if (this.getTrailsStatus() > 0) {
+    } else if (this.getTrailsStatus() === 1) {
       return "yellow";
     } else {
       return "red";
@@ -117,13 +114,48 @@ class Hero extends Component {
     return this.state.travelTime - this.state.noTraffic;
   };
 
+  capitalize = (str) => {
+    let strArray = str.split("");
+    strArray[0] = strArray[0].toUpperCase();
+    return strArray.join("");
+  };
+
+  getTraffic = (area, time) => {
+    console.log(this.state.forecastDay);
+    console.log(area);
+
+    let lat, lng;
+    if (area === "vail") {
+      lat = 39.6403;
+      lng = -106.3742;
+    } else if (area === "eagle") {
+      lat = 39.6553;
+      lng = -106.8287;
+    }
+    console.log(lat, lng);
+    fetch(
+      `http://dev.virtualearth.net/REST/v1/Routes?wayPoint.1=39.712264,-105.193971&wayPoint.2=${lat},${lng}&heading=270&distanceUnit=mi&dateTime=${time}&key=${process.env.REACT_APP_BINGMAPS_API_KEY}`
+    )
+      .then((response) => response.json())
+      // .then((data) => console.log(data.resourceSets[0].resources[0]));
+      .then((data) =>
+        this.setState({
+          travelTime: Math.round(
+            data.resourceSets[0].resources[0].travelDurationTraffic / 60
+          ),
+          noTraffic: Math.round(
+            data.resourceSets[0].resources[0].travelDuration / 60
+          ),
+        })
+      );
+  };
+
   getWeather = (area) => {
     let lat, lng;
     if (area === "vail") {
       lat = 39.6403;
       lng = -106.3742;
     } else if (area === "eagle") {
-      console.log("eagle");
       lat = 39.6553;
       lng = -106.8287;
     }
@@ -145,18 +177,37 @@ class Hero extends Component {
   };
 
   countOpenTrails = () => {
-    return this.props.trails.filter(
+    let areaTrails;
+    if (this.state.forecastArea === "vail") {
+      areaTrails = this.props.trails.filter(
+        (trail) =>
+          trail.location.split(", ")[0].toLowerCase() === "vail" ||
+          trail.location.split(", ")[0].toLowerCase() === "edwards" ||
+          trail.location.split(", ")[0].toLowerCase() === "avon" ||
+          trail.location.split(", ")[0].toLowerCase() === "minturn"
+      );
+    } else if (this.state.forecastArea === "eagle") {
+      areaTrails = this.props.trails.filter(
+        (trail) => trail.location.split(", ")[0].toLowerCase() === "eagle"
+      );
+    }
+    let openTrails = areaTrails.filter(
       (trail) => trail.conditionStatus === "All Clear"
     ).length;
+    let closedTrails = areaTrails.length - openTrails;
+    return [openTrails, closedTrails];
   };
 
   getTrafficStatus = () => {
     const travelTime = this.state.travelTime;
-    if (travelTime && travelTime <= 95) {
+    if (travelTime && travelTime <= this.getClearTime()) {
       return 0;
-    } else if (travelTime > 95 && travelTime < 110) {
+    } else if (
+      travelTime > this.getClearTime() &&
+      travelTime < this.getClearTime() * 1.2
+    ) {
       return 1;
-    } else if (travelTime >= 110) {
+    } else if (this.getClearTime() * 1.2) {
       return 2;
     }
   };
@@ -172,17 +223,12 @@ class Hero extends Component {
   };
 
   getRideStatus = () => {
-    console.log(
-      this.getWeatherStatus(),
-      this.getTrailsStatus(),
-      this.getTrafficStatus()
-    );
     if (
       this.getWeatherStatus() > 0 ||
       this.getTrailsStatus() > 1 ||
       this.getTrafficStatus() > 1
     ) {
-      return "bad";
+      return "less than ideal";
     } else if (
       this.getWeatherStatus() === 0 &&
       this.getTrailsStatus() <= 1 &&
@@ -203,6 +249,22 @@ class Hero extends Component {
       { forecastArea: event.target.value },
       this.getWeather(event.target.value)
     );
+    this.getTraffic(
+      event.target.value,
+      moment()
+        .local()
+        .add(this.state.forecastDay, "d")
+        .format("MM/DD/YYYY 09:00:00")
+    );
+  };
+
+  getClearTime = () => {
+    const area = this.state.forecastArea;
+    if (area === "vail") {
+      return 95;
+    } else if (area === "eagle") {
+      return 120;
+    }
   };
 
   handleChange = (event) => {
@@ -230,6 +292,10 @@ class Hero extends Component {
         .description,
       weatherCode: this.state.dailyForecasts[forecastIndex].weather[0].id,
     });
+    this.getTraffic(
+      this.state.forecastArea,
+      moment().local().add(forecastIndex, "d").format("MM/DD/YYYY 09:00:00")
+    );
   };
 
   async componentDidMount() {
@@ -245,7 +311,6 @@ class Hero extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           dailyForecasts: data.daily,
           tempForecast: this.convertToFahrenheit(
@@ -274,16 +339,81 @@ class Hero extends Component {
       );
   }
   render() {
-    console.log(this.getRideStatus());
     return (
       <div>
         <div className="hero">
           <div className="hero-text">
             <div className="ride-status">
-              <h2>
-                It's a <code>{this.getRideStatus()}</code> day to go ride your
-                bike in Vail!
-              </h2>
+              <p>
+                <select
+                  name="days"
+                  id="day-select"
+                  className="select-menu"
+                  style={{
+                    width: `${this.widthOfString(
+                      this.state.selectedOption.split(", ")[0] + 30
+                    )}px`,
+                  }}
+                  onChange={(event) => {
+                    this.handleChange(event);
+                  }}
+                  value={this.state.selectedOption}
+                >
+                  <option value="today">Today</option>
+                  <option value="tomorrow">Tomorrow</option>
+                  <option
+                    value={moment()
+                      .local()
+                      .add(2, "d")
+                      .format("dddd, MMM. D, YYYY")}
+                  >
+                    {moment().local().add(2, "d").format("dddd")}
+                  </option>
+                  <option
+                    value={moment()
+                      .local()
+                      .add(3, "d")
+                      .format("dddd, MMM. D, YYYY")}
+                  >
+                    {moment().local().add(3, "d").format("dddd")}
+                  </option>
+                  <option
+                    value={moment()
+                      .local()
+                      .add(4, "d")
+                      .format("dddd, MMM. D, YYYY")}
+                  >
+                    {moment().local().add(4, "d").format("dddd")}
+                  </option>
+                  <option
+                    value={moment()
+                      .local()
+                      .add(5, "d")
+                      .format("dddd, MMM. D, YYYY")}
+                  >
+                    {moment().local().add(5, "d").format("dddd")}
+                  </option>
+                </select>{" "}
+                is {this.getRideStatus() === "OK" ? "an" : "a"}{" "}
+                <code>{this.getRideStatus()}</code> day to ride your bike in{" "}
+                <select
+                  name="areas"
+                  id="area-select"
+                  className="select-menu"
+                  style={{
+                    width: `${this.widthOfString(
+                      this.state.forecastArea + 30
+                    )}px`,
+                  }}
+                  onChange={(event) => {
+                    this.handleAreaChange(event);
+                  }}
+                  value={this.state.forecastArea}
+                >
+                  <option value="vail">Vail</option>
+                  <option value="eagle">Eagle</option>
+                </select>
+              </p>
             </div>
             <div className="hero-text-sections">
               <div className="hero-text-section open-trails">
@@ -293,11 +423,13 @@ class Hero extends Component {
                   <i className="fas fa-bicycle hero-icon"></i>
                 </div>
                 <p>
-                  <code>{this.countOpenTrails(this.props.trails)}</code>
-                  {this.countOpenTrails(this.props.trails) > 1 || 0
+                  <code>{this.countOpenTrails()[0]}</code>
+                  {this.countOpenTrails()[0] > 1 ||
+                  this.countOpenTrails()[0] === 0
                     ? " trails are"
                     : " trail is"}{" "}
-                  reported open in the Eagle County area
+                  reported open in the{" "}
+                  {this.capitalize(this.state.forecastArea)} area
                 </p>
                 <p className="analysis">
                   {this.getTrailsBlurb(this.props.trails)}
@@ -313,75 +445,10 @@ class Hero extends Component {
                   ></i>
                 </div>
                 <p>
-                  <select
-                    name="areas"
-                    id="area-select"
-                    className="select-menu"
-                    style={{
-                      width: `${this.widthOfString(
-                        this.state.forecastArea + 30
-                      )}px`,
-                    }}
-                    onChange={(event) => {
-                      this.handleAreaChange(event);
-                    }}
-                    value={this.state.forecastArea}
-                  >
-                    <option value="vail">Vail</option>
-                    <option value="eagle">Eagle</option>
-                  </select>{" "}
-                  forecast for{" "}
-                  <select
-                    name="days"
-                    id="day-select"
-                    className="select-menu"
-                    style={{
-                      width: `${this.widthOfString(
-                        this.state.selectedOption.split(", ")[0] + 30
-                      )}px`,
-                    }}
-                    onChange={(event) => {
-                      this.handleChange(event);
-                    }}
-                    value={this.state.selectedOption}
-                  >
-                    <option value="today">today</option>
-                    <option value="tomorrow">tomorrow</option>
-                    <option
-                      value={moment()
-                        .local()
-                        .add(2, "d")
-                        .format("dddd, MMM. D, YYYY")}
-                    >
-                      {moment().local().add(2, "d").format("dddd")}
-                    </option>
-                    <option
-                      value={moment()
-                        .local()
-                        .add(3, "d")
-                        .format("dddd, MMM. D, YYYY")}
-                    >
-                      {moment().local().add(3, "d").format("dddd")}
-                    </option>
-                    <option
-                      value={moment()
-                        .local()
-                        .add(4, "d")
-                        .format("dddd, MMM. D, YYYY")}
-                    >
-                      {moment().local().add(4, "d").format("dddd")}
-                    </option>
-                    <option
-                      value={moment()
-                        .local()
-                        .add(5, "d")
-                        .format("dddd, MMM. D, YYYY")}
-                    >
-                      {moment().local().add(5, "d").format("dddd")}
-                    </option>
-                  </select>
-                  : A high of <code>{this.state.tempForecast}</code> degrees
-                  with <code>{this.state.weatherForecast}</code>.
+                  {this.capitalize(this.state.forecastArea)} forecast for{" "}
+                  {this.state.selectedOption.split(", ")[0]}: A high of{" "}
+                  <code>{this.state.tempForecast}</code> degrees with{" "}
+                  <code>{this.state.weatherForecast}</code>.
                 </p>
                 <p className="analysis">{this.getWeatherBlurb()}</p>
               </div>
@@ -394,15 +461,16 @@ class Hero extends Component {
                   <i className="fas fa-car hero-icon"></i>
                 </div>
                 <p>
-                  Drive time: <code>{this.state.travelTime}</code> minutes from{" "}
-                  <nobr>I-70/C470</nobr> (Golden)
+                  Drive time: <code>{this.state.travelTime}</code> min. from{" "}
+                  <nobr>I-70/C470</nobr> starting at 10am
                 </p>
 
-                {this.state.travelTime < 95 ? (
+                {this.state.travelTime < this.getClearTime() ? (
                   <p className="analysis">(That's a pretty quick trip!)</p>
                 ) : (
                   <p className="analysis">
-                    (Expect about <code>{this.state.travelTime - 95}</code>{" "}
+                    (Expect about{" "}
+                    <code>{this.state.travelTime - this.getClearTime()}</code>{" "}
                     minutes of delays)
                   </p>
                 )}
