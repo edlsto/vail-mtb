@@ -84,7 +84,7 @@
   font-family: "Rubik", sans-serif;
   background: white;
   align-self: center;
-  font-size: 2.3em;
+  font-size: 2em;
   padding: 1em;
   width: 85%;
   justify-content: center;
@@ -168,6 +168,6 @@ p {
   margin-bottom: 0.8em;
 }
 
-h2 {
-  font-size: 1.3em;
+.hero h2 {
+  font-size: 1em;
 }
