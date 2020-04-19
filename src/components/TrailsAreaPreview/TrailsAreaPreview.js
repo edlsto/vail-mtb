@@ -17,6 +17,7 @@ const getTrails = (area, trails) => {
         difficulty={trail.difficulty}
         length={trail.length}
         location={trail.location.split(", ")[0]}
+        key={trail.id}
       />
     );
   });
@@ -33,7 +34,7 @@ const TrailsAreaPreview = ({ trails, area }) => {
           <h2>{title}</h2>
         </div>
         <Link to={"/areas/" + area} className="area-link">
-          See more {title} trails <i class="fas fa-arrow-right"></i>
+          See more {title} trails <i className="fas fa-arrow-right"></i>
         </Link>
       </div>
       <div className="trail-cards-area-preview-container">{cards}</div>
