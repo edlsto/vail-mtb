@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import { latLngBounds } from "leaflet";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+import RouterForwarder from "../RouterForwarder";
 
 import "./Map.css";
 
@@ -57,13 +60,19 @@ class SimpleExample extends Component {
     }
     const position = [this.state.lat, this.state.lng];
     const markers = trails.map((trail) => {
+      console.log(trail);
+      const area = trail.location.split(" ")[0].toLowerCase();
       return (
         <Marker
           position={[trail.lat, trail.lng]}
           onClick={(e) => this.onMarkerClicked(e)}
           listing={trail}
         >
-          <Popup>{trail.name}</Popup>
+          <Popup>
+            <RouterForwarder context={this.context}>
+              <Link to={`/areas/${area}/trails/${trail.id}`}>{trail.name}</Link>
+            </RouterForwarder>
+          </Popup>
         </Marker>
       );
     });

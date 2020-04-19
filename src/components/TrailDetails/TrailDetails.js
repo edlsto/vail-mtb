@@ -5,6 +5,7 @@ import Map from "../Map/Map";
 import { fetchTrail } from "../../ApiCalls";
 import { addFavorite } from "../../actions";
 import { deleteFavorite } from "../../actions";
+import Bike from "../../assets/bike.jpg";
 
 class TrailDetails extends Component {
   constructor(props) {
@@ -13,6 +14,10 @@ class TrailDetails extends Component {
       selectedTrail: null,
     };
   }
+
+  addDefaultSrc = (e) => {
+    e.target.src = Bike;
+  };
 
   async componentDidMount() {
     const result = await fetchTrail(this.props.id);
@@ -162,6 +167,7 @@ class TrailDetails extends Component {
             className="details-photo"
             src={selectedTrail && selectedTrail.imgMedium}
             alt={selectedTrail && selectedTrail.name}
+            onError={(e) => this.addDefaultSrc(e)}
           />
         </div>
       </div>
