@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addFavorite } from "../../actions";
 import { deleteFavorite } from "../../actions";
+import Bike from "../../assets/bike.jpg";
 
 const getIcon = (difficulty) => {
   switch (difficulty) {
     case "green":
-      return <i class="fas fa-circle circle"></i>;
+      return <i className="fas fa-circle circle"></i>;
     case "blue":
-      return <i class="fas fa-square-full square"></i>;
+      return <i className="fas fa-square-full square"></i>;
     case "black":
-      return <i class="fas fa-square-full diamond"></i>;
+      return <i className="fas fa-square-full diamond"></i>;
     default:
       return;
   }
@@ -27,19 +28,23 @@ const toggleFavorite = (id, props) => {
 };
 
 const addDefaultSrc = (ev) => {
-  ev.target.src = "http://placecorgi.com/260/180";
+  ev.target.src = Bike;
 };
 
 const TrailCard = (props) => {
   return (
     <div className="trail-card">
       <div className="trail-card-img-container">
-        <img
-          className="trail-card-img"
-          src={props.imgMedium}
-          alt={props.name}
-          onError={(e) => addDefaultSrc(e)}
-        />
+        <Link
+          to={"/areas/" + props.location.toLowerCase() + "/trails/" + props.id}
+        >
+          <img
+            className="trail-card-img"
+            src={props.imgMedium}
+            alt={props.name}
+            onError={(e) => addDefaultSrc(e)}
+          />
+        </Link>
         <i
           className={`fas fa-heart fa-2x card-heart ${
             props.favorites.includes(props.id) ? "favorite" : ""
