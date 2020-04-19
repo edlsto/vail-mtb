@@ -8,36 +8,22 @@ export const fetchTrails = () => {
         ({
           id,
           name,
-          summary,
           difficulty,
-          stars,
           location,
-          url,
           imgMedium,
-          length,
-          ascent,
-          descent,
-          high,
-          low,
           latitude,
           longitude,
+          length,
         }) => {
           return {
             id,
             name,
-            summary,
             difficulty,
-            stars,
             location,
-            url,
             imgMedium,
-            length,
-            ascent,
-            descent,
-            high,
-            low,
             lat: latitude,
             lng: longitude,
+            length,
           };
         }
       );
