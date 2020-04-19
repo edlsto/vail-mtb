@@ -87,22 +87,32 @@
   font-size: 2.3em;
   padding: 1em;
   width: 85%;
-  display: flex;
   justify-content: center;
 }
 
+.hero-text-sections {
+  display: flex;
+}
+
 .hero-text-section {
-  width: 40%;
   line-height: 1.3;
 }
 
 .weather {
   border-right: 1px solid black;
-  padding-right: 2em;
+  padding: 0 1em;
+  width: 40%;
+}
+
+.open-trails {
+  border-right: 1px solid black;
+  padding: 0 1em 0 0.5em;
+  width: 30%;
 }
 
 .drive-time {
-  padding-left: 2em;
+  padding: 0 0.5em 0 1em;
+  width: 30%;
 }
 
 code {
@@ -122,4 +132,42 @@ p {
 
 .analysis {
   font-size: 0.6em;
+}
+
+.hero-icon-wrapper {
+  display: inline-block;
+  padding: 0.8em;
+  border-radius: 0.2em;
+  height: 1.3em;
+  width: 1.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 0.3em;
+  font-size: 0.8em;
+  border: 1px solid black;
+}
+
+.hero-icon-wrapper.green {
+  background: #96ff99;
+}
+
+.hero-icon-wrapper.red {
+  background: #ff7373;
+}
+
+.hero-icon-wrapper.yellow {
+  background: #fcff3c;
+}
+
+.hero-icon {
+  color: #525252;
+}
+
+.ride-status {
+  margin-bottom: 0.8em;
+}
+
+h2 {
+  font-size: 1.3em;
 }

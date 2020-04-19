@@ -14,6 +14,7 @@ export const fetchTrails = () => {
           latitude,
           longitude,
           length,
+          conditionStatus,
         }) => {
           return {
             id,
@@ -24,6 +25,7 @@ export const fetchTrails = () => {
             lat: latitude,
             lng: longitude,
             length,
+            conditionStatus,
           };
         }
       );
