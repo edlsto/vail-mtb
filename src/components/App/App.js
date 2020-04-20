@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-import Hero from "../Hero/Hero";
+import Hero from "../../containers/Hero/Hero";
 import Header from "../Header/Header";
 import { Route } from "react-router-dom";
-import TrailsAreaPreview from "../TrailsAreaPreview/TrailsAreaPreview";
-import Area from "../Area/Area";
-import TrailDetails from "../TrailDetails/TrailDetails";
+import TrailsAreaPreview from "../../containers/TrailsAreaPreview/TrailsAreaPreview";
+import Area from "../../containers/Area/Area";
+import TrailDetails from "../../containers/TrailDetails/TrailDetails";
 
 class App extends Component {
   render() {

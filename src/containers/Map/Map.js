@@ -4,7 +4,7 @@ import { latLngBounds } from "leaflet";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import RouterForwarder from "../RouterForwarder";
+import RouterForwarder from "../../components/RouterForwarder";
 
 import "./Map.css";
 
