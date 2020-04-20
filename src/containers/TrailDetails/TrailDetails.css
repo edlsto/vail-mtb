@@ -113,3 +113,9 @@
 .num-votes {
   margin-top: 0.5em;
 }
+
+.difficulty {
+  font-size: 0.7em;
+  position: relative;
+  top: -0.1em;
+}
