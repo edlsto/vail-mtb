@@ -46,6 +46,7 @@ const TrailCard = (props) => {
           />
         </Link>
         <i
+          data-testid={props.id}
           className={`fas fa-heart fa-2x card-heart ${
             props.favorites.includes(props.id) ? "favorite" : ""
           }`}
