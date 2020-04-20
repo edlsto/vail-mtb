@@ -202,13 +202,13 @@ class Hero extends Component {
         this.getTrailsStatus() >= 0 &&
         this.getTrafficStatus() >= 1)
     ) {
-      return "OK";
+      return "pretty darn good";
     } else if (
       this.getWeatherStatus() === 0 &&
       this.getTrailsStatus() === 0 &&
       this.getTrafficStatus() === 0
     ) {
-      return "great";
+      return "totally great";
     }
   };
 
@@ -405,10 +405,8 @@ class Hero extends Component {
           <div className="hero-text">
             <div className="ride-status">
               <p>
-                {this.renderDaySelect()} is{" "}
-                {this.getRideStatus() === "OK" ? "an" : "a"}{" "}
-                <code>{this.getRideStatus()}</code> day to ride your bike in{" "}
-                {this.renderAreaSelect()}
+                {this.renderDaySelect()} is <code>{this.getRideStatus()}</code>{" "}
+                day to ride your bike in {this.renderAreaSelect()}
               </p>
             </div>
             <div className="hero-text-sections">
