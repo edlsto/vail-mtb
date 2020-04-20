@@ -4,7 +4,7 @@ import { latLngBounds } from "leaflet";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-// import RouterForwarder from "../../components/RouterForwarder";
+import RouterForwarder from "../../components/RouterForwarder";
 
 import "./Map.css";
 
@@ -67,9 +67,9 @@ class TrailMap extends Component {
           key={trail.id}
         >
           <Popup>
-            {/* <RouterForwarder context={this.context}> */}
-            {trail.name}
-            {/* </RouterForwarder> */}
+            <RouterForwarder context={this.context}>
+              <Link to={`/areas/${area}/trails/${trail.id}`}>{trail.name}</Link>
+            </RouterForwarder>
           </Popup>
         </Marker>
       );

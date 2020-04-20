@@ -38,13 +38,29 @@ class TrailDetails extends Component {
     }
   };
 
+  getIcon = (difficulty) => {
+    switch (difficulty) {
+      case "green":
+        return <i className="fas fa-circle circle"></i>;
+      case "blue":
+        return <i className="fas fa-square-full square"></i>;
+      case "black":
+        return <i className="fas fa-square-full diamond"></i>;
+      default:
+        return;
+    }
+  };
+
   render() {
     const selectedTrail = this.state.selectedTrail;
     return (
       <div className="trail-detail-card">
         <div className="trail-stats-container">
           <div className="details-title">
-            {selectedTrail && selectedTrail.name}
+            {selectedTrail && selectedTrail.name}{" "}
+            <span className="difficulty">
+              {selectedTrail && this.getIcon(selectedTrail.difficulty)}
+            </span>
           </div>
           <div className="stars-heart">
             {selectedTrail && (
@@ -129,6 +145,9 @@ class TrailDetails extends Component {
               <Map selectedTrail={[selectedTrail]} />
             </div>
             <div className="secondary-stats-container">
+              <div className="details-status details-item">
+                Conditions: {selectedTrail && selectedTrail.conditionStatus}
+              </div>
               <div className="details-length details-item">
                 Length: {selectedTrail && selectedTrail.length} miles
               </div>

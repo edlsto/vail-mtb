@@ -39,11 +39,37 @@ describe("area tests", () => {
           length: 3,
           conditionStatus: "Unknown",
         },
+        {
+          id: 1,
+          key: 1,
+          name: "M trail 1",
+          difficulty: "blue",
+          location: "Minturn, Colorado",
+          imgMedium:
+            "https://cdn-files.apstatic.com/mtb/49323_medium_1554166915.jpg",
+          lat: 39.6199,
+          lng: -106.3875,
+          length: 3,
+          conditionStatus: "Unknown",
+        },
+        {
+          id: 2,
+          key: 2,
+          name: "M trail 2",
+          difficulty: "blue",
+          location: "Minturn, Colorado",
+          imgMedium:
+            "https://cdn-files.apstatic.com/mtb/49323_medium_1554166915.jpg",
+          lat: 39.6199,
+          lng: -106.3875,
+          length: 3,
+          conditionStatus: "Unknown",
+        },
       ],
     };
   });
 
-  it("should render the text we expect", () => {
+  it("should render the Vail trails", () => {
     const store = createStore(rootReducer, initialState);
     const { getByText, debug } = render(
       <Provider store={store}>
@@ -53,6 +79,19 @@ describe("area tests", () => {
       </Provider>
     );
     const trailName = getByText("Big Mamba");
+    expect(trailName).toBeInTheDocument();
+  });
+
+  it("should render the Eagle trails", () => {
+    const store = createStore(rootReducer, initialState);
+    const { getByText, debug } = render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Area area="eagle" />
+        </BrowserRouter>
+      </Provider>
+    );
+    const trailName = getByText("Pool and Ice Rink Loop");
     expect(trailName).toBeInTheDocument();
   });
 

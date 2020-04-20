@@ -352,7 +352,7 @@ describe("hero tests good conditions", () => {
     await waitForElement(() => getByText("75"));
     expect(getByText("11")).toBeInTheDocument();
     expect(getByText("0")).toBeInTheDocument();
-    expect(getByText("great")).toBeInTheDocument();
+    expect(getByText("totally great")).toBeInTheDocument();
     expect(getByText("75")).toBeInTheDocument();
     expect(getByText("clear sky")).toBeInTheDocument();
     expect(getByText("87")).toBeInTheDocument();
@@ -487,7 +487,7 @@ describe("hero tests OK conditions", () => {
     expect(getByText("1")).toBeInTheDocument();
     expect(getByText("3")).toBeInTheDocument();
     expect(getByText("(Great weather for biking!)")).toBeInTheDocument();
-    expect(getByText("OK")).toBeInTheDocument();
+    expect(getByText("pretty darn good")).toBeInTheDocument();
     expect(getByText("75")).toBeInTheDocument();
     expect(getByText("clear sky")).toBeInTheDocument();
     expect(getByText("94")).toBeInTheDocument();
