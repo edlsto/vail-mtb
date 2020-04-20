@@ -81,9 +81,9 @@ class Hero extends Component {
   getTrailsBlurb = (trails) => {
     const closedTrailsNumber = this.countOpenTrails()[1];
     return (
-      <div>
+      <span>
         (<code>{closedTrailsNumber}</code> trails are not reported open)
-      </div>
+      </span>
     );
   };
 
@@ -410,7 +410,7 @@ class Hero extends Component {
               smooth={true}
               className="circle-button"
             >
-              <img className="arrow" src={Down}></img>
+              <img className="arrow" alt="down arrow" src={Down}></img>
             </Link>
           </div>
         </div>
