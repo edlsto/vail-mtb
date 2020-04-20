@@ -22,7 +22,7 @@ class TrailDetails extends Component {
   async componentDidMount() {
     const result = await fetchTrail(this.props.id);
     this.setState({
-      selectedTrail: result[0],
+      selectedTrail: result,
     });
   }
 
