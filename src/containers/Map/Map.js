@@ -8,7 +8,7 @@ import RouterForwarder from "../../components/RouterForwarder";
 
 import "./Map.css";
 
-class SimpleExample extends Component {
+class TrailMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,6 @@ class SimpleExample extends Component {
       selectedPlace: listing,
       showingInfoWindow: true,
     });
-    // this.props.highlightListing(this.state.selectedPlace.listing_id);
   };
 
   onMapClicked = (props) => {
@@ -37,7 +36,6 @@ class SimpleExample extends Component {
         activeMarker: null,
         selectedPlace: "",
       });
-      // this.props.highlightListing(this.state.selectedPlace.listing_id);
     }
   };
 
@@ -98,4 +96,4 @@ const mapStateToProps = ({ trails }) => ({
   trails,
 });
 
-export default connect(mapStateToProps)(SimpleExample);
+export default connect(mapStateToProps)(TrailMap);
