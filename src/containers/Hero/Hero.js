@@ -6,7 +6,7 @@ import { fetchTrails, fetchWeather, fetchTraffic } from "../../ApiCalls";
 import { widthOfString, capitalize } from "../../helpers";
 import Down from "../../assets/down.png";
 import { Link as DomLink } from "react-router-dom";
-import * as moment from "moment";
+import moment from "moment";
 import { Link, Element } from "react-scroll";
 import TrailsAreaPreview from "../TrailsAreaPreview/TrailsAreaPreview";
 
@@ -26,7 +26,7 @@ class Hero extends Component {
   }
 
   getWeatherStatus = (code, temp) => {
-    if (this.state.weatherCode < 800 || this.state.tempForecast < 50) {
+    if (this.state.weatherCode < 800 || this.state.tempForecast < 45) {
       return 1;
     } else {
       return 0;
@@ -195,15 +195,18 @@ class Hero extends Component {
     ) {
       return "less than ideal";
     } else if (
-      this.getWeatherStatus() === 0 &&
-      this.getTrailsStatus() <= 1 &&
-      this.getTrafficStatus() <= 1
+      (this.getWeatherStatus() === 0 &&
+        this.getTrailsStatus() >= 1 &&
+        this.getTrafficStatus() >= 0) ||
+      (this.getWeatherStatus() === 0 &&
+        this.getTrailsStatus() >= 0 &&
+        this.getTrafficStatus() >= 1)
     ) {
       return "OK";
     } else if (
       this.getWeatherStatus() === 0 &&
       this.getTrailsStatus() === 0 &&
-      this.getTrafficStatus() <= 1
+      this.getTrafficStatus() === 0
     ) {
       return "great";
     }
@@ -253,27 +256,38 @@ class Hero extends Component {
   };
 
   async componentDidMount() {
-    const trails = await fetchTrails();
-    this.props.getTrails(trails);
-    this.setState({
-      forecastDay: moment().hour() > 12 ? 1 : 0,
-      selectedOption: moment().hour() > 12 ? "tomorrow" : "today",
-    });
+    try {
+      const trails = await fetchTrails();
+      this.props.getTrails(trails);
+      this.setState({
+        forecastDay: moment().hour() > 12 ? 1 : 0,
+        selectedOption: moment().hour() > 12 ? "tomorrow" : "today",
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
 
-    fetchWeather(...this.getLatLng("vail")).then((data) => {
+    try {
+      const data = await fetchWeather(...this.getLatLng("vail"));
       this.setState({
         dailyForecasts: data,
         tempForecast: data[this.state.forecastDay].temp.max,
         weatherForecast: data[this.state.forecastDay].weather[0].description,
         weatherCode: data[this.state.forecastDay].weather[0].id,
       });
-    });
+    } catch (e) {
+      console.log(e.message);
+    }
 
-    fetchTraffic(...this.getLatLng("vail")).then((data) =>
-      this.setState({
-        travelTime: Math.round(data / 60),
-      })
-    );
+    try {
+      await fetchTraffic(...this.getLatLng("vail")).then((data) =>
+        this.setState({
+          travelTime: Math.round(data / 60),
+        })
+      );
+    } catch (e) {
+      console.log(e.message);
+    }
   }
 
   renderAreaSelect = () => (
@@ -282,7 +296,7 @@ class Hero extends Component {
       id="area-select"
       className="select-menu"
       style={{
-        width: `${widthOfString(this.state.forecastArea + 30)}px`,
+        width: `${widthOfString(this.state.forecastArea)}px`,
       }}
       onChange={(event) => {
         this.handleAreaChange(event);
@@ -300,9 +314,7 @@ class Hero extends Component {
       id="day-select"
       className="select-menu"
       style={{
-        width: `${widthOfString(
-          this.state.selectedOption.split(", ")[0] + 30
-        )}px`,
+        width: `${widthOfString(this.state.selectedOption.split(", ")[0])}px`,
       }}
       onChange={(event) => {
         this.handleDayChange(event);
