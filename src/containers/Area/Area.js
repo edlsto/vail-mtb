@@ -22,11 +22,11 @@ const Area = ({ trails, area, favorites, pathname }) => {
       return trail.location === title + ", Colorado";
     });
   }
-
   const cards = filteredTrails.map((trail) => {
     return (
       <TrailCard
         id={trail.id}
+        key={trail.id}
         name={trail.name}
         imgMedium={trail.imgMedium}
         difficulty={trail.difficulty}
@@ -88,7 +88,7 @@ const Area = ({ trails, area, favorites, pathname }) => {
           </div>
         )}
         {favorites.length === 0 && pathname === "/favorites" ? (
-          <div class="no-favorites">
+          <div className="no-favorites">
             <h3>You have no favorites!</h3>
           </div>
         ) : (

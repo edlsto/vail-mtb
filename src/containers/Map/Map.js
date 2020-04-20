@@ -60,13 +60,13 @@ class SimpleExample extends Component {
     }
     const position = [this.state.lat, this.state.lng];
     const markers = trails.map((trail) => {
-      console.log(trail);
       const area = trail.location.split(" ")[0].toLowerCase();
       return (
         <Marker
           position={[trail.lat, trail.lng]}
           onClick={(e) => this.onMarkerClicked(e)}
           listing={trail}
+          key={trail.id}
         >
           <Popup>
             <RouterForwarder context={this.context}>

@@ -3,7 +3,6 @@ import "./App.css";
 import Hero from "../../containers/Hero/Hero";
 import Header from "../Header/Header";
 import { Route } from "react-router-dom";
-import TrailsAreaPreview from "../../containers/TrailsAreaPreview/TrailsAreaPreview";
 import Area from "../../containers/Area/Area";
 import TrailDetails from "../../containers/TrailDetails/TrailDetails";
 
@@ -16,7 +15,6 @@ class App extends Component {
           exact
           path="/"
           render={({ match }) => {
-            const { id } = match.params;
             return <Hero />;
           }}
         >
