@@ -111,14 +111,16 @@ class Hero extends Component {
 
   getWeather = (area) => {
     const [lat, lng] = this.getLatLng(area);
-    fetchWeather(lat, lng).then((data) => {
-      this.setState({
-        dailyForecasts: data,
-        tempForecast: data[this.state.forecastDay].temp.max,
-        weatherForecast: data[this.state.forecastDay].weather[0].description,
-        weatherCode: data[this.state.forecastDay].weather[0].id,
-      });
-    });
+    fetchWeather(lat, lng)
+      .then((data) => {
+        this.setState({
+          dailyForecasts: data,
+          tempForecast: data[this.state.forecastDay].temp.max,
+          weatherForecast: data[this.state.forecastDay].weather[0].description,
+          weatherCode: data[this.state.forecastDay].weather[0].id,
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   countOpenTrails = () => {
