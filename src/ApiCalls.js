@@ -79,7 +79,8 @@ export const fetchTrail = (id) => {
           };
         }
       );
-    });
+    })
+    .then((data) => data[0]);
 };
 
 export const fetchWeather = (lat, lng) => {
