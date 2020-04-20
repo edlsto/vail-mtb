@@ -14,12 +14,10 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={({ match }) => {
+          render={() => {
             return <Hero />;
           }}
-        >
-          <Hero />
-        </Route>
+        ></Route>
         <Route
           exact
           path="/areas/:area"
