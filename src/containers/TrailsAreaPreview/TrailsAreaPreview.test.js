@@ -53,7 +53,6 @@ describe("trail details tests", () => {
         </BrowserRouter>
       </Provider>
     );
-    debug();
     expect(getByText("Vail")).toBeInTheDocument();
     expect(getByText("See more Vail trails")).toBeInTheDocument();
     expect(getByText("Pool and Ice Rink Loop")).toBeInTheDocument();
