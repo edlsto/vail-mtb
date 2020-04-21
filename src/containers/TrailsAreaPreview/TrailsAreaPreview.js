@@ -3,6 +3,7 @@ import "./TrailsAreaPreview.css";
 import TrailCard from "../TrailCard/TrailCard";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const getTrails = (area, trails) => {
   const areaTrails = trails
@@ -47,3 +48,9 @@ const mapStateToProps = ({ trails }) => ({
 });
 
 export default connect(mapStateToProps)(TrailsAreaPreview);
+
+TrailsAreaPreview.propTypes = {
+  area: PropTypes.string,
+  dispatch: PropTypes.func,
+  trails: PropTypes.array,
+};

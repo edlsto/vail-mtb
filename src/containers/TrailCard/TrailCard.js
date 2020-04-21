@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { addFavorite } from "../../actions";
 import { deleteFavorite } from "../../actions";
 import Bike from "../../assets/bike.jpg";
+import PropTypes from "prop-types";
 
 const getIcon = (difficulty) => {
   switch (difficulty) {
@@ -78,3 +79,13 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrailCard);
+
+TrailCard.propTypes = {
+  addFavorite: PropTypes.func,
+  deleteFavorite: PropTypes.func,
+  favorites: PropTypes.array,
+  imgMedium: PropTypes.string,
+  length: PropTypes.number,
+  location: PropTypes.string,
+  name: PropTypes.string,
+};
