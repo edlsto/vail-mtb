@@ -1,7 +1,7 @@
 import React from "react";
 import TrailCard from "./TrailCard";
 import { BrowserRouter } from "react-router-dom";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { createStore } from "redux";
@@ -19,7 +19,7 @@ describe("trail card tests", () => {
 
   it("should render the text we expect", () => {
     const store = createStore(rootReducer, initialState);
-    const { getByText, getByAltText, debug } = render(
+    const { getByText, getByAltText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <TrailCard

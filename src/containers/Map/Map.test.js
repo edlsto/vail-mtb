@@ -1,7 +1,7 @@
 import React from "react";
 import Map from "./Map";
 import { BrowserRouter } from "react-router-dom";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { createStore } from "redux";
@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
 
 describe("map tests", () => {
-  let match, initialState, testStore, testWrapper;
+  let initialState;
   beforeEach(() => {
     initialState = {
       trails: [
@@ -45,7 +45,7 @@ describe("map tests", () => {
 
   it("should render the text we expect", () => {
     const store = createStore(rootReducer, initialState);
-    const { getByText, debug } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <Map area="vail" />

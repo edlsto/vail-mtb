@@ -165,7 +165,7 @@ describe("app tests", () => {
   it("should go to favorites page, which says you have no favorites", async () => {
     const store = createStore(rootReducer, initialState);
     const history = createMemoryHistory();
-    const { getByText, getByAltText, debug } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <Router history={history}>
           <App />
@@ -209,7 +209,7 @@ describe("app tests", () => {
   it("should be able to unfavorite a trail, then see 'no favorites'", async () => {
     const store = createStore(rootReducer, initialState);
     const history = createMemoryHistory();
-    const { getByText, getByTestId, queryByText, debug } = render(
+    const { getByText, getByTestId } = render(
       <Provider store={store}>
         <Router history={history}>
           <App />
@@ -231,7 +231,7 @@ describe("app tests", () => {
   it("should be able to go to an areas page", async () => {
     const store = createStore(rootReducer, initialState);
     const history = createMemoryHistory();
-    const { getByText, getByTestId, queryByText, debug } = render(
+    const { getByText, queryByText } = render(
       <Provider store={store}>
         <Router history={history}>
           <App />
@@ -254,7 +254,7 @@ describe("app tests", () => {
   it("should be able to go to a different page", async () => {
     const store = createStore(rootReducer, initialState);
     const history = createMemoryHistory();
-    const { getByText, getByTestId, queryByText } = render(
+    const { getByText, queryByText } = render(
       <Provider store={store}>
         <Router history={history}>
           <App />
@@ -281,7 +281,7 @@ describe("app tests", () => {
   it("should show all trails when user clicks 'explore all trails'", async () => {
     const store = createStore(rootReducer, initialState);
     const history = createMemoryHistory();
-    const { getByText, getByTestId, queryByText, debug } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <Router history={history}>
           <App />
@@ -302,7 +302,7 @@ describe("app tests", () => {
   it("should show trail details when user clicks on a card", async () => {
     const store = createStore(rootReducer, initialState);
     const history = createMemoryHistory();
-    const { getByText, getByTestId, queryByText, getByAltText, debug } = render(
+    const { getByText, getByAltText } = render(
       <Provider store={store}>
         <Router history={history}>
           <App />
@@ -326,7 +326,7 @@ describe("app tests", () => {
   it("should return home when user clicks logo", async () => {
     const store = createStore(rootReducer, initialState);
     const history = createMemoryHistory();
-    const { getByText, getByTestId, queryByText, getByAltText, debug } = render(
+    const { getByText, getByAltText } = render(
       <Provider store={store}>
         <Router history={history}>
           <App />

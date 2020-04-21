@@ -1,7 +1,7 @@
 import React from "react";
 import Area from "./Area";
 import { BrowserRouter } from "react-router-dom";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { createStore } from "redux";
@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { rootReducer } from "../../reducers";
 
 describe("area tests", () => {
-  let match, initialState, testStore, testWrapper;
+  let initialState;
   beforeEach(() => {
     initialState = {
       trails: [
@@ -71,7 +71,7 @@ describe("area tests", () => {
 
   it("should render the Vail trails", () => {
     const store = createStore(rootReducer, initialState);
-    const { getByText, debug } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <Area area="vail" />
@@ -84,7 +84,7 @@ describe("area tests", () => {
 
   it("should render the Eagle trails", () => {
     const store = createStore(rootReducer, initialState);
-    const { getByText, debug } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <Area area="eagle" />
@@ -113,7 +113,7 @@ describe("area tests", () => {
       ...initialState,
       favorites: [4362647],
     });
-    const { getByText, debug, queryByText } = render(
+    const { getByText, queryByText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <Area pathname="/favorites" />

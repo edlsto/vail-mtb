@@ -1,7 +1,7 @@
 import React from "react";
 import Hero from "./Hero";
 import { BrowserRouter } from "react-router-dom";
-import { render, fireEvent, waitForElement } from "@testing-library/react";
+import { render, waitForElement } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { createStore } from "redux";
@@ -124,7 +124,7 @@ describe("hero tests", () => {
   it("should render the text we expect", async () => {
     const store = createStore(rootReducer, initialState);
 
-    const { getByText, getByAltText, debug } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <Hero />
@@ -342,7 +342,7 @@ describe("hero tests good conditions", () => {
   it("should render 'great' for good conditions", async () => {
     const store = createStore(rootReducer, initialState);
 
-    const { getByText, getByAltText, debug } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <Hero />
@@ -476,7 +476,7 @@ describe("hero tests OK conditions", () => {
   it("should render the text we expect", async () => {
     const store = createStore(rootReducer, initialState);
 
-    const { getByText, getByAltText, debug } = render(
+    const { getByText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <Hero />

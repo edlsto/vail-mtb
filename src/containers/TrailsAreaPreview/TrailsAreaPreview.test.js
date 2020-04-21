@@ -1,7 +1,7 @@
 import React from "react";
 import TrailsAreaPreview from "./TrailsAreaPreview";
 import { BrowserRouter } from "react-router-dom";
-import { render, fireEvent, waitForElement } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { createStore } from "redux";
@@ -46,7 +46,7 @@ describe("trail details tests", () => {
 
   it("should render the text we expect", async () => {
     const store = createStore(rootReducer, initialState);
-    const { getByText, getByAltText, debug } = render(
+    const { getByText, getByAltText } = render(
       <Provider store={store}>
         <BrowserRouter>
           <TrailsAreaPreview area={"vail"} />

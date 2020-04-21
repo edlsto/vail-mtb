@@ -1,7 +1,7 @@
 import React from "react";
 import TrailDetails from "./TrailDetails";
 import { BrowserRouter } from "react-router-dom";
-import { render, fireEvent, waitForElement } from "@testing-library/react";
+import { render, waitForElement } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { fetchTrail } from "../../ApiCalls";
