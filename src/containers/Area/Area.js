@@ -3,6 +3,7 @@ import "./Area.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Map from "../Map/Map";
+import PropTypes from "prop-types";
 
 import TrailCard from "../TrailCard/TrailCard";
 
@@ -106,3 +107,10 @@ const mapStateToProps = ({ trails, favorites }) => ({
 });
 
 export default connect(mapStateToProps)(Area);
+
+Area.propTypes = {
+  dispatch: PropTypes.func,
+  favorites: PropTypes.array,
+  trails: PropTypes.array,
+  area: PropTypes.string,
+};

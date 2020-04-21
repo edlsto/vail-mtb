@@ -9,6 +9,7 @@ import { Link as DomLink } from "react-router-dom";
 import moment from "moment";
 import { Link, Element } from "react-scroll";
 import TrailsAreaPreview from "../TrailsAreaPreview/TrailsAreaPreview";
+import PropTypes from "prop-types";
 
 class Hero extends Component {
   constructor() {
@@ -452,3 +453,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hero);
+
+Hero.propTypes = {
+  getTrails: PropTypes.func,
+  trails: PropTypes.array,
+};

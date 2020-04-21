@@ -6,6 +6,7 @@ import { fetchTrail } from "../../ApiCalls";
 import { addFavorite } from "../../actions";
 import { deleteFavorite } from "../../actions";
 import Bike from "../../assets/bike.jpg";
+import PropTypes from "prop-types";
 
 class TrailDetails extends Component {
   constructor(props) {
@@ -205,3 +206,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrailDetails);
+
+TrailDetails.propTypes = {
+  addFavorite: PropTypes.func,
+  deleteFavorite: PropTypes.func,
+  favorites: PropTypes.array,
+  id: PropTypes.string,
+  trails: PropTypes.array,
+};

@@ -3,6 +3,7 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import { latLngBounds } from "leaflet";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import RouterForwarder from "../../components/RouterForwarder";
 
@@ -97,3 +98,11 @@ const mapStateToProps = ({ trails }) => ({
 });
 
 export default connect(mapStateToProps)(TrailMap);
+
+Map.propTypes = {
+  bounds: PropTypes.object,
+  center: PropTypes.array,
+  children: PropTypes.array,
+  maxZoom: PropTypes.number,
+  onClick: PropTypes.func,
+};
