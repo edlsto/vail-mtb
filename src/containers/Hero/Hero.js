@@ -405,8 +405,9 @@ class Hero extends Component {
           <div className="hero-text">
             <div className="ride-status">
               <p>
-                {this.renderDaySelect()} is <code>{this.getRideStatus()}</code>{" "}
-                day to ride your bike in {this.renderAreaSelect()}
+                {this.renderDaySelect()} is a{" "}
+                <code>{this.getRideStatus()}</code> day to ride your bike in{" "}
+                {this.renderAreaSelect()}
               </p>
             </div>
             <div className="hero-text-sections">
