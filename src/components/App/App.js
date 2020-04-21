@@ -39,7 +39,7 @@ class App extends Component {
           path="/areas/:area/trails/:id"
           render={({ match }) => {
             const { id } = match.params;
-            return <TrailDetails id={id} />;
+            return <TrailDetails id={parseInt(id)} />;
           }}
         ></Route>
       </div>
