@@ -25,7 +25,7 @@ The app uses the following external APIs:
 
 ### Home page:
 
-![image](https://user-images.githubusercontent.com/4350550/79813396-c5e8d880-8338-11ea-88d4-66deb1bcf54d.png)
+![image](https://user-images.githubusercontent.com/4350550/79813405-ced9aa00-8338-11ea-9804-dfc0ee57ae15.png)
 
 ### The user can selected a different day or area for a ride:
 
@@ -33,7 +33,7 @@ The app uses the following external APIs:
 
 ### The weather, traffic and trail status info automatically updates when a new area or date is selected.
 
-![image](https://user-images.githubusercontent.com/4350550/79813405-ced9aa00-8338-11ea-9804-dfc0ee57ae15.png)
+![image](https://user-images.githubusercontent.com/4350550/79813396-c5e8d880-8338-11ea-88d4-66deb1bcf54d.png)
 
 ### The top three trails for each area are featured on the home page:
 
