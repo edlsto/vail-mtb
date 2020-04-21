@@ -211,6 +211,6 @@ TrailDetails.propTypes = {
   addFavorite: PropTypes.func,
   deleteFavorite: PropTypes.func,
   favorites: PropTypes.array,
-  id: PropTypes.string,
+  id: PropTypes.number,
   trails: PropTypes.array,
 };
