@@ -241,6 +241,7 @@ class Hero extends Component {
       time.setSeconds(0);
       time.setMilliseconds(0);
       forecastIndex = moment(event.target.value).diff(time, "days");
+      console.log(forecastIndex);
     }
     this.setState({
       selectedOption: event.target.value,
@@ -324,16 +325,16 @@ class Hero extends Component {
     >
       <option value="today">Today</option>
       <option value="tomorrow">Tomorrow</option>
-      <option value={moment().add(2, "d").format("dddd, MMM. D, YYYY")}>
+      <option value={moment().add(2, "d").format("dddd, MM D, YYYY")}>
         {moment().add(2, "d").format("dddd")}
       </option>
-      <option value={moment().add(3, "d").format("dddd, MMM. D, YYYY")}>
+      <option value={moment().add(3, "d").format("dddd, MM D, YYYY")}>
         {moment().add(3, "d").format("dddd")}
       </option>
-      <option value={moment().add(4, "d").format("dddd, MMM. D, YYYY")}>
+      <option value={moment().add(4, "d").format("dddd, MM D, YYYY")}>
         {moment().add(4, "d").format("dddd")}
       </option>
-      <option value={moment().add(5, "d").format("dddd, MMM. D, YYYY")}>
+      <option value={moment().add(5, "d").format("dddd, MM D, YYYY")}>
         {moment().add(5, "d").format("dddd")}
       </option>
     </select>
