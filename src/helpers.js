@@ -1,17 +1,12 @@
 export const widthOfString = (str) => {
-  if (str === "today") {
-    return 125;
-  } else if (str === "tomorrow") {
-    return 190;
-  } else if (str === "vail") {
-    return 85;
-  } else if (str === "eagle") {
-    return 120;
-  } else if (str === "Wednesday") {
-    return 210;
-  } else {
-    return str.length * 21 + 10;
+  var canvas = document.createElement("canvas");
+  var ctx = canvas.getContext("2d");
+  let width;
+  if (ctx) {
+    ctx.font = "32px Rubik";
+    width = ctx.measureText(str).width;
   }
+  return width + 40;
 };
 
 export const capitalize = (str) => {
