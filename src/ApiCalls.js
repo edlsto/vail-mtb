@@ -104,7 +104,7 @@ export const fetchWeather = (lat, lng) => {
 
 export const fetchTraffic = (lat, lng, time = "") => {
   return fetch(
-    `http://dev.virtualearth.net/REST/v1/Routes?wayPoint.1=39.712264,-105.193971&wayPoint.2=${lat},${lng}&heading=270&distanceUnit=mi&dateTime=${time}&key=${process.env.REACT_APP_BINGMAPS_API_KEY}`
+    `https://dev.virtualearth.net/REST/v1/Routes?wayPoint.1=39.712264,-105.193971&wayPoint.2=${lat},${lng}&heading=270&distanceUnit=mi&dateTime=${time}&key=${process.env.REACT_APP_BINGMAPS_API_KEY}`
   )
     .then((response) => response.json())
     .then((data) => data.resourceSets[0].resources[0].travelDurationTraffic);
