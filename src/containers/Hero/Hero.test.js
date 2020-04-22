@@ -12,6 +12,7 @@ jest.mock("../../ApiCalls");
 
 describe("hero tests", () => {
   let initialState;
+  HTMLCanvasElement.prototype.getContext = jest.fn();
 
   beforeEach(() => {
     initialState = {
