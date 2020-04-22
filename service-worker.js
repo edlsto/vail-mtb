@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/vail-mtb/precache-manifest.80baf0a96a166fe04826ef6b79795c62.js"
+  "/vail-mtb/precache-manifest.c3cefa2320ac1b256e065354405bab51.js"
 );
 
 self.addEventListener('message', (event) => {
