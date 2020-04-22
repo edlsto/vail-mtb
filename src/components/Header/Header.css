@@ -28,3 +28,9 @@ header {
   text-decoration: none;
   color: black;
 }
+
+@media screen and (max-width: 1000px) {
+  .text {
+    font-size: 2em;
+  }
+}
