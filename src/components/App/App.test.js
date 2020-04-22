@@ -22,6 +22,7 @@ describe("app tests", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    HTMLCanvasElement.prototype.getContext = jest.fn();
 
     initialState = {
       trails: [],
