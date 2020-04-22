@@ -22,3 +22,9 @@
   color: #4a79d6;
   text-decoration: none;
 }
+
+@media screen and (max-width: 1000px) {
+  .trail-cards-area-preview-container {
+    flex-direction: column;
+  }
+}

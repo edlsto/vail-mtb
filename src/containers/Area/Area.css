@@ -61,3 +61,34 @@
   position: sticky;
   top: 2em;
 }
+
+@media screen and (max-width: 1000px) {
+  .area-wrapper {
+    flex-direction: column;
+  }
+
+  .area-map-container {
+    height: 500px;
+    width: 80%;
+    position: static;
+    top: 2em;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .area-cards-container {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2em;
+  }
+
+  .areas-btns {
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+
+  .area-btn {
+    margin-bottom: 1em;
+    font-size: 1em;
+  }
+}
