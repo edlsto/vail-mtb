@@ -123,6 +123,7 @@
 @media screen and (max-width: 1000px) {
   .trail-detail-card {
     flex-direction: column-reverse;
+    margin-bottom: 5em;
   }
 
   .details-photo {
