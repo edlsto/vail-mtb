@@ -240,8 +240,9 @@ class Hero extends Component {
       time.setMinutes(0);
       time.setSeconds(0);
       time.setMilliseconds(0);
-      forecastIndex = moment(event.target.value).diff(time, "days");
-      console.log(forecastIndex);
+      const dateArray = event.target.value.split(", ");
+      const date = dateArray[2] + "-" + dateArray[1].split(" ").join("-");
+      forecastIndex = moment(date).diff(time, "days");
     }
     this.setState({
       selectedOption: event.target.value,
