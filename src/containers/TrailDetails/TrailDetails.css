@@ -119,3 +119,26 @@
   position: relative;
   top: -0.1em;
 }
+
+@media screen and (max-width: 1000px) {
+  .trail-detail-card {
+    flex-direction: column-reverse;
+  }
+
+  .details-photo {
+    margin: 0 0 1em 0;
+  }
+
+  .stats-map-container {
+    flex-direction: column;
+  }
+
+  .secondary-stats-container {
+    margin-top: 2em;
+  }
+
+  .map-container-details {
+    margin: 0;
+    width: 100%;
+  }
+}
