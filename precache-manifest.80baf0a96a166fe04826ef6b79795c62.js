@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "efbb8645104e96cd3d830ed79fb1168d",
+    "revision": "d8cd86fda412e2164008ff60f513a4d3",
     "url": "/vail-mtb/index.html"
   },
   {
-    "revision": "f88f8c109ccc55fd8985",
+    "revision": "a45895291313478bc299",
     "url": "/vail-mtb/static/css/main.bb9bb088.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vail-mtb/static/js/2.32fd4c8f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f88f8c109ccc55fd8985",
-    "url": "/vail-mtb/static/js/main.1204a0f6.chunk.js"
+    "revision": "a45895291313478bc299",
+    "url": "/vail-mtb/static/js/main.2e37d035.chunk.js"
   },
   {
     "revision": "ae7e067b8ed18164e249",
