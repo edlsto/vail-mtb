@@ -1,4 +1,4 @@
-# Vail MTB
+# Vail MTB [![Build Status](https://travis-ci.org/edlsto/vail-mtb.svg?branch=master)](https://travis-ci.org/edlsto/vail-mtb)
 
 Vail MTB is a mountain-biking app designed for mountain bikers who live in Denver and are interested in riding the trails in the Vail area.
 
