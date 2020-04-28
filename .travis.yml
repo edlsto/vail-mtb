@@ -1,5 +1,11 @@
 language: node_js
 node_js:
-  - "node"
+  - node
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: SWpXTCsrCLJxI1IGdxJFobKRP5og7wy9tbL3cJd0vf9Pn7undEBYcFVnj8yhyjI0+12Jl06NpNBxOj5N8nHZT2i0zUI8FVSw53zN3l8Zhx5OyXqK2R82JKOwFvULIxmMZH66Ewxt71C88NB44CN4I0mHYi/y13CGCKt6vePQkf2IxaUfOhU0BYgoTbkzrRbIhkyksacHesgmoh5I880xnAbtrUtQdRcSLF41e6L+D8OHdKBggR6uvwGscIU/3xP1k3nsc+uYVeJyFNlQG5ZhIsfQSubQnfdNMHfXcHdP1073XY8XG5sFcEcIGn9ogx+4ly92IqMk1rvW4cUKljNBAV53NGsdlVCkLZyVbublQ0D98i7bpDtvf4HVd3KSXGGOAPjjO1KNZWZmJDAPq+NhqZGieTF+GBPSRoTZNKP7ldQE5L8cUpnTrUSPQQMwzqe9Jl5aOrT9xWvY9yVzhB0cpzRHYm2v9XOC533LimbUwD8FaPFaUfCpOvmYiAAb6v1+Z35LfCNVczhZdcZe6Bnv77PQemHxc89xUFX2oOHV7mTAQvrPzD6AiRD9IL5I46vopJZP7H+T1MLTt1dQlH+Pw4J644+THH3MVV1AZv+EWs4/Btc6ZNZol+tir1qYCDIdY+ODxo5TrwcHLVk/HGlrusnwD5GjbyNVV7JyCPlGMXo=
+  app: vail-mtb
+  skip_cleanup: true
