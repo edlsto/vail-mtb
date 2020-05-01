@@ -460,3 +460,4 @@ Hero.propTypes = {
   getTrails: PropTypes.func,
   trails: PropTypes.array,
 };
+//
